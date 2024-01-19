@@ -7,8 +7,8 @@ packages = ["plotly_utils"]
 
 [project]
 name = "plotly_utils"
-version = "0.0.1"
-description = "plotly-utils..."
+version = "0.0.2"
+description = "Some simple patterns/defaults for Plotly."
 readme = "README.md"
 authors = [{ name = "Lukas Twist", email = "itsluketwist@gmail.com" }]
 license = { file = "LICENSE" }
