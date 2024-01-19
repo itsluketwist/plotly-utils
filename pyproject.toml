@@ -3,12 +3,12 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-packages = ["src"]
+packages = ["plotly_utils"]
 
 [project]
-name = "python_template"
-version = "0.0.0"
-description = "python-template..."
+name = "plotly_utils"
+version = "0.0.1"
+description = "plotly-utils..."
 readme = "README.md"
 authors = [{ name = "Lukas Twist", email = "itsluketwist@gmail.com" }]
 license = { file = "LICENSE" }
@@ -17,8 +17,12 @@ classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
 ]
-keywords = ["python-template"]
-dependencies = []
+keywords = ["plotly-utils"]
+dependencies = [
+    "plotly ~= 5.18.0",
+    "IPython ~= 8.20.0",
+    "kaleido ~= 0.2.1",
+]
 requires-python = ">=3.10"
 
 [project.optional-dependencies]
@@ -28,4 +32,4 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/itsluketwist/python-template"
+Homepage = "https://github.com/itsluketwist/plotly-utils"
