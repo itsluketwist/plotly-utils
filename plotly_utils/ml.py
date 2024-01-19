@@ -20,17 +20,19 @@ def create_learning_curves(
     footnote_text: str | None = None,
     colors: list[str] | None = None,
 ):
+    curves = ["training", "testing"]
+
     if colors is None:
         colors = ["DodgerBlue", "Coral"]
 
     if project is not None:
-        title = f"{standout(project, colors[0])} {title}"
+        title = f"{standout(project, 'DarkSlateBlue')} {title}"
 
     if epochs is None:
         epochs = len(train_acc)
     x_data = [str(n + 1) for n in range(epochs)]
 
-    figure = make_subplots(rows=1, cols=2)
+    figure = make_subplots(rows=1, cols=2, shared_xaxes=True)
     figure.update_layout(
         title_text=title_subtitle_text(title=title, subtitle=subtitle),
         legend=DEFAULT_LEGEND,
@@ -38,6 +40,7 @@ def create_learning_curves(
     )
     figure.update_yaxes(title_text="Accuracy Percentage", row=1, col=1)
     figure.update_yaxes(title_text="Loss Value", row=1, col=2)
+    figure.update_xaxes(title_text=standout("εpochs", "DarkSlateBlue"))
 
     if footnote_text:
         add_footnote(
@@ -45,16 +48,12 @@ def create_learning_curves(
             text=footnote_text,
         )
 
-    acc_data = [
-        ("training", train_acc),
-        ("validation", test_acc),
-    ]
-    for i, y_data in enumerate(acc_data):
+    for i, y_data in enumerate([train_acc, test_acc]):
         figure.add_trace(
             go.Scatter(
-                name=y_data[0],
+                name=curves[i],
                 x=x_data,
-                y=y_data[1],
+                y=y_data,
                 marker_color=colors[i],
                 mode="lines",
                 line_width=3,
@@ -64,16 +63,12 @@ def create_learning_curves(
             col=1,
         )
 
-    loss_data = [
-        ("training", train_loss),
-        ("validation", test_loss),
-    ]
-    for i, y_data in enumerate(loss_data):
+    for i, y_data in enumerate([train_loss, test_loss]):
         figure.add_trace(
             go.Scatter(
-                name=y_data[0],
+                name=curves[i],
                 x=x_data,
-                y=y_data[1],
+                y=y_data,
                 marker_color=colors[i],
                 mode="lines",
                 line_width=3,
